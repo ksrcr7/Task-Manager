@@ -8,7 +8,7 @@
 class Task{
 private:
     int id{};
-    bool done{};
+    bool done = false;
     std::string title;
     static bool IdValid(int);
     static bool TitleValid(const std::string&);
@@ -16,6 +16,7 @@ private:
 public:
     Task() = default;
     Task(int,bool,const std::string& );
+    Task(int,const std::string&);
     [[nodiscard]] int getId()const;
     [[nodiscard]] const std::string & getTitle()const;
     [[nodiscard]] bool isDone()const;

@@ -56,5 +56,19 @@ void Task::SetDone(bool d) {
 
 }
 
+Task::Task(int n, const std::string &t) {
+    if(!IdValid(n)){
+        throw std::invalid_argument("Id must be >= 1.");
+    }
+    if(!TitleValid(t)){
+        throw std::invalid_argument("Title must not be empty.");
+    }
+
+    id = n;
+    title = t;
+
+
+}
+
 
 
