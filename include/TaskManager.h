@@ -11,12 +11,13 @@
 
 class TaskManager{
 private:
-    std::vector<Task> tasks;
-    int next_id{};
+    std::vector<Task> _tasks;
+    int _next_id = 1;
     std::string storage_path;
 
 public:
     explicit TaskManager(const std::string&);
+    int add(const std::string &title);
 
 
 

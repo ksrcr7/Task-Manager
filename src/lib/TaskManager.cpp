@@ -24,3 +24,10 @@ TaskManager::TaskManager(const std::string &st_path) {
 
 }
 
+int TaskManager::add(const std::string &title) {
+    int _id = _next_id;
+    _tasks.emplace_back(_id,title);
+    ++_next_id;
+    return _id;
+}
+
