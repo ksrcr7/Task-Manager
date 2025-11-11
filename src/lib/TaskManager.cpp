@@ -49,5 +49,14 @@ bool TaskManager::mark_done(int id) {
     return true;
 }
 
+bool TaskManager::remove (int id) {
+    auto idx = find_index_by_id(id);
+    if(!idx.has_value())
+        return false;
+
+    _tasks.erase(_tasks.begin() + *idx);
+    return true;
+}
+
 
 

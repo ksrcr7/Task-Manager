@@ -22,6 +22,7 @@ public:
     explicit TaskManager(const std::string&);
     int add(const std::string &title);
     bool mark_done(int);
+    bool remove(int);
 
 
 
