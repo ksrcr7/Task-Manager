@@ -57,6 +57,56 @@ bool TaskManager::remove (int id) {
     _tasks.erase(_tasks.begin() + *idx);
     return true;
 }
+static std::string escape(const std::string& s){
+    std::string out;
+    out.reserve(s.size());
+
+    for(unsigned char c : s){
+        switch (c) {
+            case '\\': out+="\\\\"; break;
+            case ';': out+="\\;"; break;
+            case '\n':out+="\\n"; break;
+            case '\r': out+="\\r";break;
+            default: out+= static_cast<char>(c);break;
+
+        }
+    }
+    return out;
+}
+
+static std::string unescape(const std::string& s){
+    std::string out;
+    out.reserve(s.size());
+    bool escape_mode = false;
+
+    for(unsigned char c : s){
+        if(!escape_mode){
+            if(c == '\\'){
+                escape_mode = true;
+            }
+            else{
+                out += static_cast<char>(c);
+            }
+        }
+        else{
+            switch (c) {
+                case '\\': out+="\\";break;
+                case ';': out+=';';break;
+                case 'n': out+='\n'; break;
+                case 'r': out+='\r'; break;
+                default:
+                    out+='\\';
+                    out+=static_cast<char>(c);
+                    break;
+
+            }
+            escape_mode = false;
+        }
+
+    }
+    if(escape_mode)out+='\\';
+    return out;
+}
 
 
 
