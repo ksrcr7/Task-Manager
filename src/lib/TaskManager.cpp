@@ -31,3 +31,23 @@ int TaskManager::add(const std::string &title) {
     return _id;
 }
 
+std::optional<size_t> TaskManager::find_index_by_id(int s) {
+    if(s < 1)return std::nullopt;
+    for(size_t i = 0; i < _tasks.size(); ++i){
+        if(_tasks[i].getId() == s)
+            return i;
+    }
+    return std::nullopt;
+}
+
+bool TaskManager::mark_done(int id) {
+    auto idx = find_index_by_id(id);
+    if(!idx.has_value())
+        return false;
+
+    _tasks[*idx].SetDone(true);
+    return true;
+}
+
+
+
