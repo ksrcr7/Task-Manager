@@ -24,6 +24,8 @@ public:
     int add(const std::string &title);
     bool mark_done(int);
     bool remove(int);
+    [[nodiscard]] bool save()const;
+    bool load();
 
 
 
