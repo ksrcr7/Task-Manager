@@ -1,5 +1,6 @@
 #include "CLI.h"
 #include "Task.h"
+#include <iomanip>
 
 
 namespace {
@@ -84,6 +85,24 @@ int CLI::run(TaskManager &tm, const std::vector<std::string> &args) {
             std::cerr << "Error: " << e.what() << "\n";
             return 1;
         }
+    }
+    else if(cmd == "list"){
+        const auto& tasks = tm.list();
+
+        if(tasks.empty()) {
+            std::cout << "There are no tasks" << '\n';
+            return 0;
+        }
+        for(const auto& it : tasks){
+            if(it.isDone()){
+                std::cout<<"[x] #"<<it.getId()<<" : "<<it.getTitle()<<'\n';
+            }
+            else{
+                std::cout<<"[ ] #"<<it.getId()<<" : "<<it.getTitle()<<'\n';
+
+            }
+        }
+        return 0;
     }
 
 
