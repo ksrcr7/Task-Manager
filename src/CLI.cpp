@@ -1,7 +1,7 @@
 #include "CLI.h"
 #include "Task.h"
-#include <iomanip>
-
+#include <algorithm>
+#include <cctype>
 
 namespace {
 
@@ -41,6 +41,12 @@ namespace {
             out += c;
         }
         return out;
+    }
+    bool isNumber(const std::string& s){
+        if(s.empty())return false;
+
+        return std::all_of(s.begin(),s.end(),
+                           [](unsigned char ch){return std::isdigit(ch);});
     }
 
 
@@ -104,7 +110,31 @@ int CLI::run(TaskManager &tm, const std::vector<std::string> &args) {
         }
         return 0;
     }
+    else if(cmd == "done"){
+        if(args.size() < 2){
+            std::cerr<<"ID required."<<'\n';
+            return 1;
+        }
+        const std::string& temp = args[1];
+        if(isNumber(temp)){
+            int id = std::stoi(temp);
+            bool ok = tm.mark_done(id);
+            if(!ok){
+                std::cerr<<"Not found"<<'\n';
+                return 1;
+            }
+            else{
+                std::cerr<<"Ok"<<'\n';
+                return 0;
+            }
+        }
+        else{
+            std::cerr<<"Invalid ID"<<'\n';
+            return 1;
+        }
 
+
+    }
 
 
 
