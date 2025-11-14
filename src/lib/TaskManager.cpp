@@ -216,6 +216,10 @@ bool TaskManager::load() {
 
 }
 
+std::vector<Task> TaskManager::ShowTasks() const {
+    return _tasks;
+}
+
 
 
 
