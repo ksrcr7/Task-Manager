@@ -26,7 +26,7 @@ public:
     bool remove(int);
     [[nodiscard]] bool save()const;
     bool load();
-    [[nodiscard]] std::vector<Task> ShowTasks()const;
+    [[nodiscard]] std::vector<Task> list()const;
 
 
 

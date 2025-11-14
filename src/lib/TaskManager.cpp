@@ -216,7 +216,7 @@ bool TaskManager::load() {
 
 }
 
-std::vector<Task> TaskManager::ShowTasks() const {
+std::vector<Task> TaskManager::list() const {
     return _tasks;
 }
 
