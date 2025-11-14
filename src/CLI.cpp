@@ -158,10 +158,10 @@ int CLI::run(TaskManager &tm, const std::vector<std::string> &args) {
             return 1;
         }
     }
-
-
-
-
+    else{
+        std::cerr<<"Unknown command. Try 'help'."<<'\n';
+        return 1;
+    }
 
 }
 
