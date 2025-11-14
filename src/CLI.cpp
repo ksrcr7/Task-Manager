@@ -61,6 +61,8 @@ namespace {
 
 
 
+
+
 }
 
 int CLI::run(TaskManager &tm, const std::vector<std::string> &args) {
@@ -134,6 +136,27 @@ int CLI::run(TaskManager &tm, const std::vector<std::string> &args) {
         }
 
 
+    }
+    else if(cmd == "remove"){
+        if(args.size() < 2){
+            std::cerr<<"ID required."<<'\n';
+            return 1;
+        }
+        const std::string& temp = args[1];
+        if(isNumber(temp)){
+            int id = std::stoi(temp);
+            bool ok = tm.remove(id);
+            if(!ok){
+                std::cerr<<"Not found"<<'\n';
+                return 1;
+            }
+            std::cout<<"Ok"<<'\n';
+            return 0;
+        }
+        else{
+            std::cerr<<"Invalid ID"<<'\n';
+            return 1;
+        }
     }
 
 
